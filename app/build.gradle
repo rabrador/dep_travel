@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.3'
+    defaultConfig {
+        applicationId "com.nptu.csie.newtravel30"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 39
+        versionName "2.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        releaseConfig {
+            storeFile file("Travelkey.jks");
+            storePassword("nptucsie");
+            keyAlias "Travel";
+            keyPassword "nptucsie";
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseConfig
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    //compile 'com.google.android.gms:play-services:9.8.0'
+
+
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.google.android.gms:play-services-location:10.2.4'
+    compile 'com.google.android.gms:play-services-maps:10.2.4'
+    compile 'com.github.lguipeng:BubbleView:1.0.1'
+    compile 'com.android.support:design:23.0.0'
+    compile 'com.quickblox:quickblox-android-sdk-core:3.3.0'
+    compile 'com.quickblox:quickblox-android-sdk-chat:3.3.0'
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    compile 'com.google.android.gms:play-services-analytics:10.2.4'
+    testCompile 'junit:junit:4.12'
+}

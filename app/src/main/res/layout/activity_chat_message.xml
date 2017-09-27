@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_chat_message"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.example.han.newtravel30.ChatMessageActivity">
+
+    <ImageButton
+        android:id="@+id/emoji_button"
+        android:background="@null"
+        android:src="@mipmap/ic_smiley"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:padding="4dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+
+    <ImageButton
+        android:id="@+id/send_button"
+        android:background="@null"
+        android:src="@android:drawable/ic_menu_send"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:padding="4dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+
+    <EditText
+        android:id="@+id/edt_content"
+        android:hint="輸入訊息"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/send_button"
+        android:layout_toRightOf="@+id/emoji_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ListView
+        android:stackFromBottom="true"
+        android:id="@+id/list_of_message"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/edt_content"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+</RelativeLayout>
