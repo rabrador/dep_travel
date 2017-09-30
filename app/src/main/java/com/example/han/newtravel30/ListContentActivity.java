@@ -1,13 +1,21 @@
 package com.example.han.newtravel30;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.media.Image;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.han.newtravel30.AR.useAPI;
 
 import org.w3c.dom.Text;
 
@@ -20,6 +28,10 @@ import java.net.URL;
 public class ListContentActivity extends AppCompatActivity {
     private TextView textCont;
     private ImageView imageContent;
+    private ImageButton imgBtnMap;
+    private ImageButton imgBtnFB;
+    private String longitude;
+    private String latitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +40,13 @@ public class ListContentActivity extends AppCompatActivity {
 
         init_view();
 
+        registerBtnHandle();
+
         // Receive request from Hot.java
         final Bundle bundle = this.getIntent().getExtras();
+
+        latitude = bundle.getString("Nlat");
+        longitude = bundle.getString("Elong");
 
         // Load Image from URL
         new Thread(new Runnable() {
@@ -53,9 +70,34 @@ public class ListContentActivity extends AppCompatActivity {
         textCont.setText(bundle.getString("introduction"));
     }
 
+    private void registerBtnHandle() {
+        imgBtnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Location locat =useAPI.getMyLocation(ListContentActivity.this);
+                String target = "http://maps.google.com/maps?saddr=" + latitude + "," + longitude + "&daddr="
+                                 + locat.getLatitude() + "," + locat.getLongitude();
+
+                Uri uri = Uri.parse(target);
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+
+                startActivity(intent);
+            }
+        });
+
+        imgBtnFB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+
     private void init_view() {
         textCont = (TextView) findViewById(R.id.textContent);
         imageContent = (ImageView) findViewById(R.id.imageContent);
+        imgBtnMap = (ImageButton) findViewById(R.id.imageButtonMap);
+        imgBtnFB = (ImageButton) findViewById(R.id.imageButtonFBLike);
     }
 
     public Bitmap getImageFromURL(String src) {
@@ -70,6 +112,7 @@ public class ListContentActivity extends AppCompatActivity {
 
         } catch (IOException e) {
             e.printStackTrace();
+            /* Default Image */
             return BitmapFactory.decodeResource(getResources(), R.drawable.pingtung);
         }
     }
