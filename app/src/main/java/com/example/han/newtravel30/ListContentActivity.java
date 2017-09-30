@@ -88,7 +88,13 @@ public class ListContentActivity extends AppCompatActivity {
         imgBtnFB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/"));
+                    startActivity(intent);
+                } catch (Exception e) { // has no Facebook app
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com"));
+                    startActivity(intent);
+                }
             }
         });
     }
