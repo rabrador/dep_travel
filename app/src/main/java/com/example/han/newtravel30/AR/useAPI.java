@@ -1,11 +1,18 @@
 package com.example.han.newtravel30.AR;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
+
+import static android.content.Context.LOCATION_SERVICE;
 
 public class useAPI {
     public useAPI() {
@@ -39,9 +46,18 @@ public class useAPI {
             for (int i = 0; i < array.length(); i++) {
                 JSONObject subObj = array.getJSONObject(i);
 
-                Touris touris = new Touris(subObj.getString("Name"), subObj.getString("Title"), subObj.getString("Introduction"),
-                        subObj.getString("Elong"), subObj.getString("Nlat"));
-                list.add(touris);
+                try {
+                    JSONArray imgArray = subObj.getJSONArray("Images");
+                    JSONObject imgObj = imgArray.getJSONObject(0);
+
+                    Touris touris = new Touris(subObj.getString("Name"), subObj.getString("Title"), subObj.getString("Introduction"),
+                            subObj.getString("Elong"), subObj.getString("Nlat"), imgObj.getString("Original"), 0);
+                    list.add(touris);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,5 +69,28 @@ public class useAPI {
     public static boolean isTouchInContain(int width, float touchX, float touchY, float targetX, float targetY) {
         return touchX > width && touchX < targetX + width &&
                 touchY > width && touchY < targetY + width;
+    }
+
+    public static Location getMyLocation(Context packageContext) {
+        Location myLocat;
+        LocationManager locationMgr;
+
+        Location bestLocation = null;
+        locationMgr = (LocationManager) packageContext.getSystemService(LOCATION_SERVICE);
+
+        List<String> providers = locationMgr.getProviders(true);
+        for (String provider : providers) {
+            Location locat = locationMgr.getLastKnownLocation(provider);
+            if (locat == null) {
+                continue;
+            }
+            if (bestLocation == null || locat.getAccuracy() < bestLocation.getAccuracy()) {
+                // Found best last known location: %s", l);
+                bestLocation = locat;
+            }
+        }
+        myLocat = bestLocation;
+
+        return myLocat;
     }
 }

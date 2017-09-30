@@ -1,20 +1,41 @@
 package com.example.han.newtravel30.AR;
 
+import java.util.ArrayList;
+
 public class Touris {
-    String Data;
-    String Name;
-    String Title;
-    String Introduction;
-    String Longitude;
-    String Latitude;
+    private String Data;
+    private String Name;
+    private String Title;
+    private String Introduction;
+    private String Longitude;
+    private String Latitude;
+    private String ImageURL;
+    private int Classification;
 
-
-    public Touris(String name, String title, String introduction, String longitude, String latitude) {
+    public Touris(String name, String title, String introduction, String longitude, String latitude, String imageURL, int classification) {
         Name = name;
         Title = title;
         Introduction = introduction;
         Longitude = longitude;
         Latitude = latitude;
+        ImageURL = imageURL;
+        Classification = classification;
+    }
+
+    public String getImageURL() {
+        return ImageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        ImageURL = imageURL;
+    }
+
+    public int getClassification() {
+        return Classification;
+    }
+
+    public void setClassification(int classification) {
+        Classification = classification;
     }
 
     public String getData() {
@@ -65,4 +86,20 @@ public class Touris {
         Latitude = latitude;
     }
 
+    public static ArrayList<Touris> copyList(ArrayList<Touris> source, int count) {
+        ArrayList<Touris> list = new ArrayList<>();
+
+        for(int i=0; i<count; i++) {
+            Touris touris = new Touris(source.get(i).getName(), source.get(i).getTitle(), source.get(i).getIntroduction(),
+                    "0", "0", source.get(i).getImageURL(), 0);
+            list.add(touris);
+        }
+
+        return list;
+    }
+
+    public static void createEmptyEntry(ArrayList<Touris> source) {
+        Touris touris = new Touris("", "", "", "0", "0", "", 0);
+        source.add(touris);
+    }
 }
