@@ -31,8 +31,6 @@ public class ListContentActivity extends AppCompatActivity {
         // Receive request from Hot.java
         final Bundle bundle = this.getIntent().getExtras();
 
-//        Toast.makeText(this, "imageURL" + bundle.getString("imageURL"), Toast.LENGTH_SHORT).show();
-
         // Load Image from URL
         new Thread(new Runnable() {
             @Override
@@ -72,8 +70,7 @@ public class ListContentActivity extends AppCompatActivity {
 
         } catch (IOException e) {
             e.printStackTrace();
+            return BitmapFactory.decodeResource(getResources(), R.drawable.pingtung);
         }
-
-        return null;
     }
 }
