@@ -4,25 +4,20 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
-import android.media.Image;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.han.newtravel30.AR.useAPI;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class ListContentActivity extends AppCompatActivity {
@@ -30,6 +25,7 @@ public class ListContentActivity extends AppCompatActivity {
     private ImageView imageContent;
     private ImageButton imgBtnMap;
     private ImageButton imgBtnFB;
+    private String name;
     private String longitude;
     private String latitude;
 
@@ -45,6 +41,7 @@ public class ListContentActivity extends AppCompatActivity {
         // Receive request from Hot.java
         final Bundle bundle = this.getIntent().getExtras();
 
+        name = bundle.getString("name");
         latitude = bundle.getString("Nlat");
         longitude = bundle.getString("Elong");
 
@@ -89,10 +86,10 @@ public class ListContentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/"));
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://hashtag/" + name));
                     startActivity(intent);
                 } catch (Exception e) { // has no Facebook app
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com"));
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/hashtag/" + name));
                     startActivity(intent);
                 }
             }

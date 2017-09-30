@@ -4,18 +4,13 @@ package com.example.han.newtravel30;
  * Created by z3632 on 2017/5/20.
  */
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.han.newtravel30.AR.Touris;
 import com.example.han.newtravel30.AR.useAPI;
@@ -64,7 +59,6 @@ public class HotListActivity extends AppCompatActivity {
 
             if (dbTourism.get(i).getName().indexOf("景") > 0 || dbTourism.get(i).getName().indexOf("館") > 0) {
                 dbTourism.get(i).setClassification(Hot.classifyItemEnum.CLASSIFY_SCENE.ordinal()); // CLASSIFY_SCENE : 風景
-                continue;
             }
         }
 
@@ -97,6 +91,7 @@ public class HotListActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(HotListActivity.this, ListContentActivity.class);
                 Bundle bundle = new Bundle();
+                bundle.putString("name", displayTourism.get(position).getName());
                 bundle.putString("introduction", displayTourism.get(position).getIntroduction());
                 bundle.putString("imageURL", displayTourism.get(position).getImageURL());
                 bundle.putString("Elong", displayTourism.get(position).getLongitude());
