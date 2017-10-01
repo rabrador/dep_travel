@@ -7,19 +7,30 @@ public class Touris {
     private String Name;
     private String Title;
     private String Introduction;
+    private String Address;
     private String Longitude;
     private String Latitude;
     private String ImageURL;
     private int Classification;
 
-    public Touris(String name, String title, String introduction, String longitude, String latitude, String imageURL, int classification) {
+    public Touris(String name, String title, String introduction, String address,
+                  String longitude, String latitude, String imageURL, int classification) {
         Name = name;
         Title = title;
         Introduction = introduction;
+        Address = address;
         Longitude = longitude;
         Latitude = latitude;
         ImageURL = imageURL;
         Classification = classification;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
     }
 
     public String getImageURL() {
@@ -91,7 +102,7 @@ public class Touris {
 
         for(int i=0; i<count; i++) {
             Touris touris = new Touris(source.get(i).getName(), source.get(i).getTitle(), source.get(i).getIntroduction(),
-                    "0", "0", source.get(i).getImageURL(), 0);
+                    source.get(i).getAddress(), "0", "0", source.get(i).getImageURL(), 0);
             list.add(touris);
         }
 
@@ -99,7 +110,7 @@ public class Touris {
     }
 
     public static void createEmptyEntry(ArrayList<Touris> source) {
-        Touris touris = new Touris("", "", "", "0", "0", "", 0);
+        Touris touris = new Touris("", "", "", "", "0", "0", "", 0);
         source.add(touris);
     }
 }
