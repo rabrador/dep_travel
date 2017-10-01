@@ -1,4 +1,4 @@
-package com.example.han.newtravel30;
+package com.example.han.newtravel30.HotList;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,8 +12,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.han.newtravel30.AR.useAPI;
+import com.example.han.newtravel30.R;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +47,8 @@ public class ListContentActivity extends AppCompatActivity {
         latitude = bundle.getString("Nlat");
         longitude = bundle.getString("Elong");
 
+        Toast.makeText(ListContentActivity.this, "Loading...", Toast.LENGTH_SHORT).show();
+
         // Load Image from URL
         new Thread(new Runnable() {
             @Override
@@ -71,7 +75,8 @@ public class ListContentActivity extends AppCompatActivity {
         imgBtnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Location locat =useAPI.getMyLocation(ListContentActivity.this);
+                Location locat = useAPI.getMyLocation(ListContentActivity.this);
+
                 String target = "http://maps.google.com/maps?saddr=" + latitude + "," + longitude + "&daddr="
                                  + locat.getLatitude() + "," + locat.getLongitude();
 

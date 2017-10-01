@@ -1,4 +1,4 @@
-package com.example.han.newtravel30;
+package com.example.han.newtravel30.HotList;
 
 /**
  * Created by z3632 on 2017/5/20.
@@ -9,11 +9,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.han.newtravel30.AR.Touris;
 import com.example.han.newtravel30.AR.useAPI;
+import com.example.han.newtravel30.R;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -69,6 +70,7 @@ public class HotListActivity extends AppCompatActivity {
                 Touris.createEmptyEntry(displayTourism);
                 displayTourism.get(newIndex).setName(dbTourism.get(i).getName());
                 displayTourism.get(newIndex).setIntroduction(dbTourism.get(i).getIntroduction());
+                displayTourism.get(newIndex).setAddress(dbTourism.get(i).getAddress());
                 displayTourism.get(newIndex).setImageURL(dbTourism.get(i).getImageURL());
                 displayTourism.get(newIndex).setLongitude(dbTourism.get(i).getLongitude());
                 displayTourism.get(newIndex).setLatitude(dbTourism.get(i).getLatitude());
@@ -77,13 +79,9 @@ public class HotListActivity extends AppCompatActivity {
         }
 
         // insert to ListView
-        String[] namesArr = new String[newIndex];
-
-        for (int i = 0; i < displayTourism.size(); i++) {
-            namesArr[i] = displayTourism.get(i).getName();
-        }
-
-        mList.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1, namesArr));
+        Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show();
+        ListAdapter adapter = new ListAdapter(this, displayTourism);
+        mList.setAdapter(adapter);
 
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

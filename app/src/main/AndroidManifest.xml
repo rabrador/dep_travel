@@ -32,8 +32,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Hot" />
-        <activity android:name=".HotListActivity" />
+        <activity android:name=".HotList.Hot" />
+        <activity android:name=".HotList.HotListActivity" />
+        <activity android:name=".HotList.ListContentActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -76,8 +77,6 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ChaoZhou" />
         <activity android:name=".AR.ContentActivity" />
-        <activity android:name="com.nptu.csie.newtravel30.HotListActivity" />
-        <activity android:name=".ListContentActivity"></activity>
     </application>
 
 </manifest>

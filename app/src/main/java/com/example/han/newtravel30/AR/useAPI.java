@@ -3,6 +3,9 @@ package com.example.han.newtravel30.AR;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
@@ -12,6 +15,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,5 +102,21 @@ public class useAPI {
         }
 
         return bestLocation;
+    }
+
+    public static Bitmap getImageFromURL(String src, Resources res, int defaultImageID) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.connect();
+
+            InputStream input = conn.getInputStream();
+            return BitmapFactory.decodeStream(input);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            /* Default Image */
+            return BitmapFactory.decodeResource(res, defaultImageID);
+        }
     }
 }

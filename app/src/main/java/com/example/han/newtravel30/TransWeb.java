@@ -38,4 +38,13 @@ public class TransWeb extends AppCompatActivity {
         // 載入網址
         mWebView.loadUrl(a);
     }
+
+    public static class HotListActivity extends AppCompatActivity {
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_hot_list);
+        }
+    }
 }

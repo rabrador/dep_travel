@@ -1,4 +1,4 @@
-package com.example.han.newtravel30;
+package com.example.han.newtravel30.HotList;
 
 /**
  * Created by z3632 on 2017/5/20.
@@ -8,9 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
+
+import com.example.han.newtravel30.R;
 
 
 public class Hot extends AppCompatActivity {
