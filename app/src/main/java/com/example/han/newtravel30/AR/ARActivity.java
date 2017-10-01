@@ -62,7 +62,7 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
     private final boolean DEBUG_MESSAGE = true;
     private final boolean TEST_TRACE_CODE = true;
     private final int REQUEST_CAMERA = 1;
-    private final int REQUEST_LOCATION = 2;
+    public static final int REQUEST_LOCATION = 2;
     private final int REQUEST_SCREEN_SHOT = 3;
     private final int AR_OBJECT_WIDTH = 400;
     private final int MAXIMUM_NUM_DISPLAY_AR = 2;
