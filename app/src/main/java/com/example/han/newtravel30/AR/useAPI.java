@@ -1,8 +1,11 @@
 package com.example.han.newtravel30.AR;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.support.v4.app.ActivityCompat;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -51,7 +54,7 @@ public class useAPI {
                     JSONObject imgObj = imgArray.getJSONObject(0);
 
                     Touris touris = new Touris(subObj.getString("Name"), subObj.getString("Title"), subObj.getString("Introduction"),
-                            subObj.getString("Elong"), subObj.getString("Nlat"), imgObj.getString("Original"), 0);
+                            subObj.getString("FullAddress"), subObj.getString("Elong"), subObj.getString("Nlat"), imgObj.getString("Original"), 0);
                     list.add(touris);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -72,11 +75,14 @@ public class useAPI {
     }
 
     public static Location getMyLocation(Context packageContext) {
-        Location myLocat;
         LocationManager locationMgr;
 
         Location bestLocation = null;
         locationMgr = (LocationManager) packageContext.getSystemService(LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(packageContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity)packageContext, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, ARActivity.REQUEST_LOCATION);
+        }
 
         List<String> providers = locationMgr.getProviders(true);
         for (String provider : providers) {
@@ -89,8 +95,7 @@ public class useAPI {
                 bestLocation = locat;
             }
         }
-        myLocat = bestLocation;
 
-        return myLocat;
+        return bestLocation;
     }
 }
