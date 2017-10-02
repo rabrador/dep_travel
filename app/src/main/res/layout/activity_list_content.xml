@@ -27,7 +27,8 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:weightSum="1">
             <ImageButton
                 android:layout_width="70dp"
                 android:layout_height="55dp"
@@ -36,12 +37,31 @@
                 android:background="@drawable/image_map_hot"
                 android:id="@+id/imageButtonMap" />
 
+            <TextView
+                android:text="景點導航"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="-65dp"
+                android:layout_marginTop="35dp"
+                android:id="@+id/textView2"
+                android:layout_weight="0.12"
+                android:textSize="15sp" />
+
             <ImageButton
                 android:layout_width="70dp"
                 android:layout_height="55dp"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/image_like_hot"
                 android:id="@+id/imageButtonFBLike" />
+            <TextView
+                android:text="定位打卡"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="-65dp"
+                android:layout_marginTop="35dp"
+                android:id="@+id/textView"
+                android:layout_weight="0.12"
+                android:textSize="15sp" />
         </LinearLayout>
 
         <TextView

@@ -59,7 +59,7 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
     /*********************
      * DEFINE VARIABLE
      ********************/
-    private final boolean DEBUG_MESSAGE = true;
+    private final boolean DEBUG_MESSAGE = false;
     private final boolean TEST_TRACE_CODE = true;
     private final int REQUEST_CAMERA = 1;
     public static final int REQUEST_LOCATION = 2;
