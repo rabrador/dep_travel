@@ -1,133 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="2"
-    android:background="@drawable/pingtung">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:weightSum="6">
+    android:background="@drawable/image_back_main">
 
         <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:background="@drawable/hot" />
+        android:id="@+id/imageButtonHot"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="200dp"
+        android:background="@drawable/image_hot_main" />
 
         <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="熱門景點"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="22sp" />
-
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="190dp"
+        android:text="熱 門 景 點"
+        android:textColor="@color/colorAccent"
+        android:textSize="22sp" />
+        <!--***********************************************************************-->
         <ImageButton
-            android:id="@+id/Btn_Chat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:background="@drawable/friend" />
+        android:id="@+id/imageButtonChat"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="100dp"
+        android:background="@drawable/image_fb_main" />
 
         <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="社群軟體"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="22sp" />
-
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
+        android:layout_marginLeft="90dp"
+        android:text="社 群 軟 體"
+        android:textColor="@color/colorAccent"
+        android:textSize="22sp" />
+        <!--***********************************************************************-->
         <ImageButton
-            android:id="@+id/Btn_Facebook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:background="@drawable/facebook" />
+        android:id="@+id/imageButtonTraffic"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="250dp"
+        android:background="@drawable/image_traffic_main" />
 
         <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="上傳打卡"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="22sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:weightSum="6">
-
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="380dp"
+        android:layout_marginLeft="240dp"
+        android:text="交 通 資 訊"
+        android:textColor="@color/colorAccent"
+        android:textSize="22sp" />
+        <!--***********************************************************************-->
         <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:background="@drawable/nearby" />
+        android:id="@+id/imageButtonAR"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+            android:layout_marginTop="380dp"
+            android:layout_marginLeft="120dp"
+        android:background="@drawable/image_ar_main" />
 
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="附近地點"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="22sp" />
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            android:layout_marginTop="460dp"
+            android:layout_marginLeft="110dp"
+        android:text="擴 增 實 境"
+        android:textColor="@color/colorAccent"
+        android:textSize="22sp" />
 
-        <ImageButton
-            android:id="@+id/imageButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:background="@drawable/car" />
+        <!--<LinearLayout-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:weightSum="6"-->
+            <!--android:layout_marginTop="70dp">-->
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="交通資訊"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="22sp" />
+        <!--<ImageButton-->
+            <!--android:id="@+id/imageButton"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="150dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@drawable/image_hot_main" />-->
 
-        <ImageButton
-            android:id="@+id/Btn_AR"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:background="@drawable/ar" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:text="熱門景點"-->
+            <!--android:textColor="@color/common_google_signin_btn_text_dark_focused"-->
+            <!--android:textSize="22sp" />-->
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="擴增實境"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="22sp" />
-                </LinearLayout>
+        <!--<ImageButton-->
+            <!--android:id="@+id/Btn_Chat"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="150dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@drawable/image_fb_main" />-->
 
-</LinearLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/textView5"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:text="社群軟體"-->
+            <!--android:textColor="@color/common_google_signin_btn_text_dark_focused"-->
+            <!--android:textSize="22sp" />-->
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/Btn_Facebook"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@drawable/facebook" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/textView7"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:text="上傳打卡"-->
+            <!--android:textColor="@color/common_google_signin_btn_text_dark_focused"-->
+            <!--android:textSize="22sp" />-->
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:weightSum="6"-->
+            <!--android:layout_marginTop="70dp">-->
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/imageButton2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@drawable/nearby" />-->
+                <!--<TextView-->
+            <!--android:id="@+id/textView3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:text="附近地點"-->
+            <!--android:textColor="@color/common_google_signin_btn_text_dark_focused"-->
+            <!--android:textSize="22sp" />-->
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/imageButton4"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="150dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@drawable/image_traffic_main" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/textView6"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:text="交通資訊"-->
+            <!--android:textColor="@color/common_google_signin_btn_text_dark_focused"-->
+            <!--android:textSize="22sp" />-->
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/Btn_AR"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="150dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@drawable/image_ar_main" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/textView8"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:text="擴增實境"-->
+            <!--android:textColor="@color/common_google_signin_btn_text_dark_focused"-->
+            <!--android:textSize="22sp" />-->
+                <!--</LinearLayout>-->
+
+</RelativeLayout>

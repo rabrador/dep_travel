@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -95,7 +94,6 @@ public class useAPI {
 
         List<String> providers = locationMgr.getProviders(true);
         for (String provider : providers) {
-            Toast.makeText(packageContext, provider, Toast.LENGTH_SHORT).show();
             Location locat = locationMgr.getLastKnownLocation(provider);
             if (locat == null) {
                 continue;
