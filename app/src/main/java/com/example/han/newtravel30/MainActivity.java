@@ -1,7 +1,7 @@
 package com.example.han.newtravel30;
 
 import android.content.Intent;
-import android.net.Uri;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,15 +10,17 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.han.newtravel30.AR.ARActivity;
+import com.example.han.newtravel30.AR.useAPI;
 import com.example.han.newtravel30.HotList.Hot;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.location.LocationListener;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LocationListener {
     private ImageButton bJump1;
     private ImageButton bJump2;
     private ImageButton bJump3;
@@ -27,12 +29,14 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton bJump6;
     public static GoogleAnalytics analytics;
     public static Tracker tracker;
+    public static  Location myLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        myLocation = useAPI.getMyLocation(MainActivity.this);
         new connectEDU().execute("http://140.115.197.16/?school=nptu&app=pingtungtravel&year=106");
 
         analytics = GoogleAnalytics.getInstance(this);
@@ -58,12 +62,17 @@ public class MainActivity extends AppCompatActivity {
         JumpToAR();
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
     private void init_view() {
         bJump1 = (ImageButton) findViewById(R.id.imageButton);
-        bJump2 = (ImageButton) findViewById(R.id.imageButton2);
+//        bJump2 = (ImageButton) findViewById(R.id.imageButton2);
         bJump3 = (ImageButton) findViewById(R.id.Btn_Chat);
         bJump4 = (ImageButton) findViewById(R.id.imageButton4);
-        bJump5 = (ImageButton) findViewById(R.id.Btn_Facebook);
+//        bJump5 = (ImageButton) findViewById(R.id.Btn_Facebook);
         bJump6 = (ImageButton) findViewById(R.id.Btn_AR);
     }
 
@@ -80,14 +89,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void JumpToNear() {
-        bJump2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
+//        bJump2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setClass(MainActivity.this, MapsActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     public void JumpToFriend() {
@@ -113,14 +122,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void JumpToFacebook() {
-        bJump5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse("facebook:/wall");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
+//        bJump5.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Uri uri = Uri.parse("facebook:/wall");
+//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     public void JumpToAR() {

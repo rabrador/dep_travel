@@ -16,13 +16,14 @@ import android.widget.Toast;
 
 import com.example.han.newtravel30.AR.useAPI;
 import com.example.han.newtravel30.R;
+import com.google.android.gms.location.LocationListener;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ListContentActivity extends AppCompatActivity {
+public class ListContentActivity extends AppCompatActivity implements LocationListener {
     private TextView textCont;
     private ImageView imageContent;
     private ImageButton imgBtnMap;
@@ -30,6 +31,7 @@ public class ListContentActivity extends AppCompatActivity {
     private String name;
     private String longitude;
     private String latitude;
+    private Location myLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class ListContentActivity extends AppCompatActivity {
 
         init_view();
 
+        myLocation = useAPI.getMyLocation(ListContentActivity.this);
         registerBtnHandle();
 
         // Receive request from Hot.java
@@ -71,19 +74,31 @@ public class ListContentActivity extends AppCompatActivity {
         textCont.setText(bundle.getString("introduction"));
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
     private void registerBtnHandle() {
         imgBtnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Location locat = useAPI.getMyLocation(ListContentActivity.this);
+                if (myLocation == null) {
+                    String target = "geo:" + latitude + "," + longitude;
+                    Uri uri = Uri.parse(target);
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
 
-                String target = "http://maps.google.com/maps?saddr=" + latitude + "," + longitude + "&daddr="
-                                 + locat.getLatitude() + "," + locat.getLongitude();
+                    startActivity(intent);
+                }
+                else {
+                    String target = "http://maps.google.com/maps?saddr=" + latitude + "," + longitude + "&daddr="
+                            + myLocation.getLatitude() + "," + myLocation.getLongitude();
 
-                Uri uri = Uri.parse(target);
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+                    Uri uri = Uri.parse(target);
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
 
-                startActivity(intent);
+                    startActivity(intent);
+                }
             }
         });
 

@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -85,12 +86,16 @@ public class useAPI {
         Location bestLocation = null;
         locationMgr = (LocationManager) packageContext.getSystemService(LOCATION_SERVICE);
 
-        if (ActivityCompat.checkSelfPermission(packageContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity)packageContext, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, ARActivity.REQUEST_LOCATION);
+        if (ActivityCompat.checkSelfPermission(packageContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(packageContext, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity)packageContext,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    ARActivity.REQUEST_LOCATION);
         }
 
         List<String> providers = locationMgr.getProviders(true);
         for (String provider : providers) {
+            Toast.makeText(packageContext, provider, Toast.LENGTH_SHORT).show();
             Location locat = locationMgr.getLastKnownLocation(provider);
             if (locat == null) {
                 continue;
