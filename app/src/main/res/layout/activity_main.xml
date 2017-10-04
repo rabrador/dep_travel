@@ -64,7 +64,7 @@
         android:id="@+id/imageButtonAR"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="380dp"
+        android:layout_marginTop="430dp"
         android:layout_marginLeft="120dp"
         android:background="@drawable/image_ar_main" />
 
@@ -72,7 +72,7 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="460dp"
+        android:layout_marginTop="510dp"
         android:layout_marginLeft="110dp"
         android:text="擴 增 實 境"
         android:textColor="@color/colorAccent"
