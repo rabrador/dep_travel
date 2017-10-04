@@ -1,5 +1,6 @@
 package com.example.han.newtravel30.AR;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -120,6 +121,16 @@ public class useAPI {
             e.printStackTrace();
             /* Default Image */
             return BitmapFactory.decodeResource(res, defaultImageID);
+        }
+    }
+
+    public static void preCheckPermission(Context packageContext) {
+        if (ActivityCompat.checkSelfPermission(packageContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(packageContext, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                ActivityCompat.checkSelfPermission(packageContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
+                ActivityCompat.checkSelfPermission(packageContext, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity)packageContext, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.CAMERA}, ARActivity.CONTEXT_INCLUDE_CODE);
         }
     }
 }

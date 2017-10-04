@@ -26,14 +26,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private ImageButton imageButtonAR;
     public static GoogleAnalytics analytics;
     public static Tracker tracker;
-    public static  Location myLocation;
+    public static Location myLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myLocation = useAPI.getMyLocation(MainActivity.this);
+        useAPI.preCheckPermission(MainActivity.this);
+
         new connectEDU().execute("http://140.115.197.16/?school=nptu&app=pingtungtravel&year=106");
 
         analytics = GoogleAnalytics.getInstance(this);
