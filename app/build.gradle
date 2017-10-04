@@ -5,10 +5,10 @@ android {
     buildToolsVersion '25.0.3'
     defaultConfig {
         applicationId "com.nptu.csie.newtravel30"
-        minSdkVersion 21
-        targetSdkVersion 25
-        versionCode 41
-        versionName "2.2.0"
+        minSdkVersion 22
+        targetSdkVersion 22
+        versionCode 42
+        versionName "3.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
