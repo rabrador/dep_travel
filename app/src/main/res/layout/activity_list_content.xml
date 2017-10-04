@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/image_back_list"
     tools:context="com.example.han.newtravel30.HotList.ListContentActivity">
 
     <LinearLayout
@@ -26,7 +27,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:weightSum="1">
             <ImageButton
@@ -39,13 +40,14 @@
 
             <TextView
                 android:text="景點導航"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="-65dp"
-                android:layout_marginTop="35dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-75dp"
+                android:layout_marginTop="60dp"
                 android:id="@+id/textView2"
                 android:layout_weight="0.12"
-                android:textSize="15sp" />
+                android:textSize="20sp"
+                android:textColor="@color/colorAccent" />
 
             <ImageButton
                 android:layout_width="70dp"
@@ -55,22 +57,24 @@
                 android:id="@+id/imageButtonFBLike" />
             <TextView
                 android:text="定位打卡"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="-65dp"
-                android:layout_marginTop="35dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-75dp"
+                android:layout_marginTop="60dp"
                 android:id="@+id/textView"
                 android:layout_weight="0.12"
-                android:textSize="15sp" />
+                android:textSize="20sp"
+                android:textColor="@color/colorAccent" />
         </LinearLayout>
 
         <TextView
             android:text="TextView"
             android:layout_width="wrap_content"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:id="@+id/textContent"
             android:scrollbars = "vertical"
-            android:layout_weight="1"/>
+            android:layout_weight="2"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
     </LinearLayout>
 
 

@@ -131,7 +131,7 @@ public class HotListActivity extends AppCompatActivity {
                 public void run() {
 
                     final Bitmap bitmap = useAPI.getImageFromURL(rowItem.get(position).getImageURL(),
-                            HotListActivity.this.getResources(), R.drawable.car);
+                            HotListActivity.this.getResources(), R.drawable.image_list_default);
 
                     // Display image
                     HotListActivity.this.runOnUiThread(new Runnable() {

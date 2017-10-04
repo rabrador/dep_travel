@@ -4,7 +4,8 @@
     android:id="@+id/activity_list_users"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HotList.HotListActivity">
+    tools:context=".HotList.HotListActivity"
+    android:background="@drawable/image_back_list">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
