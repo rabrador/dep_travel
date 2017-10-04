@@ -15,10 +15,10 @@ import com.example.han.newtravel30.R;
 
 public class Hot extends AppCompatActivity {
 
-    private ImageButton btnA;
-    private ImageButton btnB;
-    private ImageButton btnC;
-    private ImageButton btnD;
+    private ImageButton imageButtonCulture;
+    private ImageButton imageButtonBike;
+    private ImageButton imageButtonNature;
+    private ImageButton imageButtonPoint;
 
     public static int REQUEST_CLASSIFY = 1;
     public enum classifyItemEnum {
@@ -42,7 +42,7 @@ public class Hot extends AppCompatActivity {
     }
 
     private void registerBtnHandle() {
-        btnA.setOnClickListener(new View.OnClickListener() {
+        imageButtonCulture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
@@ -54,7 +54,7 @@ public class Hot extends AppCompatActivity {
             }
         });
 
-        btnB.setOnClickListener(new View.OnClickListener() {
+        imageButtonBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
@@ -66,7 +66,7 @@ public class Hot extends AppCompatActivity {
             }
         });
 
-        btnC.setOnClickListener(new View.OnClickListener() {
+        imageButtonNature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
@@ -78,7 +78,7 @@ public class Hot extends AppCompatActivity {
             }
         });
 
-        btnD.setOnClickListener(new View.OnClickListener() {
+        imageButtonPoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
@@ -92,10 +92,10 @@ public class Hot extends AppCompatActivity {
     }
 
     private void init_view() {
-        btnA = (ImageButton) findViewById(R.id.imgBtnA);
-        btnB = (ImageButton) findViewById(R.id.imgBtnB);
-        btnC = (ImageButton) findViewById(R.id.imgBtnC);
-        btnD = (ImageButton) findViewById(R.id.imgBtnD);
+        imageButtonCulture = (ImageButton) findViewById(R.id.imageButtonCulture);
+        imageButtonBike = (ImageButton) findViewById(R.id.imageButtonBike);
+        imageButtonNature = (ImageButton) findViewById(R.id.imageButtonNature);
+        imageButtonPoint = (ImageButton) findViewById(R.id.imageButtonPoint);
     }
 
 }

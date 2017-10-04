@@ -64,139 +64,17 @@
         android:id="@+id/imageButtonAR"
         android:layout_width="80dp"
         android:layout_height="80dp"
-            android:layout_marginTop="380dp"
-            android:layout_marginLeft="120dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginLeft="120dp"
         android:background="@drawable/image_ar_main" />
 
         <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-            android:layout_marginTop="460dp"
-            android:layout_marginLeft="110dp"
+        android:layout_marginTop="460dp"
+        android:layout_marginLeft="110dp"
         android:text="擴 增 實 境"
         android:textColor="@color/colorAccent"
         android:textSize="22sp" />
-
-        <!--<LinearLayout-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:weightSum="6"-->
-            <!--android:layout_marginTop="70dp">-->
-
-        <!--<ImageButton-->
-            <!--android:id="@+id/imageButton"-->
-            <!--android:layout_width="150dp"-->
-            <!--android:layout_height="150dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:background="@drawable/image_hot_main" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/textView4"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:text="熱門景點"-->
-            <!--android:textColor="@color/common_google_signin_btn_text_dark_focused"-->
-            <!--android:textSize="22sp" />-->
-
-        <!--<ImageButton-->
-            <!--android:id="@+id/Btn_Chat"-->
-            <!--android:layout_width="150dp"-->
-            <!--android:layout_height="150dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:background="@drawable/image_fb_main" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/textView5"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:text="社群軟體"-->
-            <!--android:textColor="@color/common_google_signin_btn_text_dark_focused"-->
-            <!--android:textSize="22sp" />-->
-
-        <!--<ImageButton-->
-            <!--android:id="@+id/Btn_Facebook"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:background="@drawable/facebook" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/textView7"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:text="上傳打卡"-->
-            <!--android:textColor="@color/common_google_signin_btn_text_dark_focused"-->
-            <!--android:textSize="22sp" />-->
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:weightSum="6"-->
-            <!--android:layout_marginTop="70dp">-->
-
-        <!--<ImageButton-->
-            <!--android:id="@+id/imageButton2"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:background="@drawable/nearby" />-->
-                <!--<TextView-->
-            <!--android:id="@+id/textView3"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:text="附近地點"-->
-            <!--android:textColor="@color/common_google_signin_btn_text_dark_focused"-->
-            <!--android:textSize="22sp" />-->
-
-        <!--<ImageButton-->
-            <!--android:id="@+id/imageButton4"-->
-            <!--android:layout_width="150dp"-->
-            <!--android:layout_height="150dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:background="@drawable/image_traffic_main" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/textView6"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:text="交通資訊"-->
-            <!--android:textColor="@color/common_google_signin_btn_text_dark_focused"-->
-            <!--android:textSize="22sp" />-->
-
-        <!--<ImageButton-->
-            <!--android:id="@+id/Btn_AR"-->
-            <!--android:layout_width="150dp"-->
-            <!--android:layout_height="150dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:background="@drawable/image_ar_main" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/textView8"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:text="擴增實境"-->
-            <!--android:textColor="@color/common_google_signin_btn_text_dark_focused"-->
-            <!--android:textSize="22sp" />-->
-                <!--</LinearLayout>-->
-
 </RelativeLayout>
