@@ -69,9 +69,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         imageButtonChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, ChatActivity.class);
-                startActivity(intent);
+                if (useAPI.checkNetWork(MainActivity.this)) {
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, ChatSelectActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Please check the device network connection.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

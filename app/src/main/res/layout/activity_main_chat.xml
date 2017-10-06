@@ -4,8 +4,8 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    tools:context="com.example.han.newtravel30.ChatActivity">
+    tools:context="com.example.han.newtravel30.ChatActivity"
+    android:background="@color/cardview_light_background">
 
     <ImageView
         android:id="@+id/image_message"
@@ -32,7 +32,8 @@
                 android:hint="帳號"
                 android:padding="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/textBlack"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -45,7 +46,8 @@
                 android:padding="5dp"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/textBlack"/>
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
