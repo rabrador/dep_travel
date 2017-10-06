@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.han.newtravel30.AR.ARActivity;
 import com.example.han.newtravel30.AR.useAPI;
@@ -77,9 +78,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         imageButtonTraffic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, TrafficActivity.class);
-                startActivity(intent);
+                if (useAPI.checkNetWork(MainActivity.this)) {
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, TrafficActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Please check the device network connection.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -77,7 +77,6 @@
         <activity
             android:name=".AR.ARActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ChaoZhou" />
         <activity android:name=".AR.ContentActivity" />
     </application>
 

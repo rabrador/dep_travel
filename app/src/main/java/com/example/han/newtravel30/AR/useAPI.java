@@ -110,6 +110,18 @@ public class useAPI {
         return bestLocation;
     }
 
+    public static Boolean checkNetWork(Context packageContext) {
+        ConnectivityManager mConnectivityManager = (ConnectivityManager) packageContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+
+        if (mNetworkInfo != null) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public static Bitmap getImageFromURL(String src, Resources res, int defaultImageID, Context packageContext) {
         ConnectivityManager mConnectivityManager = (ConnectivityManager) packageContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
