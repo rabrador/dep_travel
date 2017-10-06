@@ -34,9 +34,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HotList.Hot" />
+        <activity android:name=".HotList.Hot"
+            android:screenOrientation="portrait"/>
         <activity android:name=".HotList.HotListActivity" />
-        <activity android:name=".HotList.ListContentActivity" />
+        <activity android:name=".HotList.ListContentActivity"
+            android:screenOrientation="portrait"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
