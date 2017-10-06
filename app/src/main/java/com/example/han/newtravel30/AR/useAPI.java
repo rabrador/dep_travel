@@ -9,6 +9,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.ActivityCompat;
 
 import org.json.JSONArray;
@@ -108,20 +110,36 @@ public class useAPI {
         return bestLocation;
     }
 
-    public static Bitmap getImageFromURL(String src, Resources res, int defaultImageID) {
-        try {
-            URL url = new URL(src);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.connect();
+    public static Bitmap getImageFromURL(String src, Resources res, int defaultImageID, Context packageContext) {
+        ConnectivityManager mConnectivityManager = (ConnectivityManager) packageContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
 
-            InputStream input = conn.getInputStream();
-            return BitmapFactory.decodeStream(input);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            /* Default Image */
-            return BitmapFactory.decodeResource(res, defaultImageID);
+        /* Check connect to network or not */
+        if (mNetworkInfo != null) {
+            try {
+                URL url = new URL(src);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.connect();
+
+                InputStream input = (InputStream) url.getContent();
+
+                return BitmapFactory.decodeStream(input, null, options);
+            } catch (IOException e) {
+                e.printStackTrace();
+
+                /* Default Image */
+                InputStream input = packageContext.getResources().openRawResource(defaultImageID);
+                return BitmapFactory.decodeStream(input, null, options);
+            }
         }
+        else {
+            InputStream input = packageContext.getResources().openRawResource(defaultImageID);
+            return BitmapFactory.decodeStream(input, null, options);
+        }
+
     }
 
     public static void preCheckPermission(Context packageContext) {
