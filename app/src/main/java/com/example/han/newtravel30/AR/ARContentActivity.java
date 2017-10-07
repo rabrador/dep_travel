@@ -7,12 +7,12 @@ import android.widget.Toast;
 
 import com.example.han.newtravel30.R;
 
-public class ContentActivity extends AppCompatActivity {
+public class ARContentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_content);
+        setContentView(R.layout.activity_ar_content);
 
         Intent intent = getIntent();
         Toast.makeText(this, intent.getStringExtra("name").toString(), Toast.LENGTH_LONG).show();

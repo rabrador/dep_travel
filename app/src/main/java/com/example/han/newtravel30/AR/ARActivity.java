@@ -388,7 +388,7 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
                     if (dbAR.getIsShown(i) == true) {
                         if (useAPI.isTouchInContain(AR_OBJECT_WIDTH, x, y, dbAR.getXCoord(i), dbAR.getYCoord(i))) {
                             Intent intCont = new Intent();
-                            intCont.setClass(CamActivity.this, ContentActivity.class);
+                            intCont.setClass(CamActivity.this, ARContentActivity.class);
                             intCont.putExtra("name", dbAR.getName(i));
                             startActivity(intCont);
                         }
