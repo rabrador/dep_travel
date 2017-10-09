@@ -59,7 +59,7 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
     /*********************
      * DEFINE VARIABLE
      ********************/
-    private final boolean DEBUG_MESSAGE = true;
+    private final boolean DEBUG_MESSAGE = false;
     private final boolean TEST_TRACE_CODE = true;
     private final int REQUEST_CAMERA = 1;
     public static final int REQUEST_LOCATION = 2;
@@ -401,7 +401,9 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
             super.onDraw(canvas);
             dispCount = 0;
 
-            dbgCreateArObj(canvas, ((float) (screenWidth * 0.35)), ((float) (screenHeight * 0.85)), "debug mode");
+            if (DEBUG_MESSAGE == true) {
+                dbgCreateArObj(canvas, ((float) (screenWidth * 0.35)), ((float) (screenHeight * 0.85)), "debug mode");
+            }
 
             for (int i = 0; i < dbAR.getSize(); i++) {
                 if (myOri != dbAR.getQuadrant(i)) {
