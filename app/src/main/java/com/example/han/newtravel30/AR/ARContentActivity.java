@@ -15,6 +15,6 @@ public class ARContentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ar_content);
 
         Intent intent = getIntent();
-        Toast.makeText(this, intent.getStringExtra("name").toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, intent.getStringExtra("name").toString(), Toast.LENGTH_SHORT).show();
     }
 }

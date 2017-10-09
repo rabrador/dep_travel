@@ -78,8 +78,8 @@ public class useAPI {
     }
 
     public static boolean isTouchInContain(int width, float touchX, float touchY, float targetX, float targetY) {
-        return touchX > width && touchX < targetX + width &&
-                touchY > width && touchY < targetY + width;
+        return touchX > targetX && touchX < (targetX + width) &&
+                touchY > targetY && (touchY < targetY + width);
     }
 
     public static Location getMyLocation(Context packageContext) {

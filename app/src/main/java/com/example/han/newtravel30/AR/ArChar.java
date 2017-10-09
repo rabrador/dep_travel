@@ -8,6 +8,18 @@ import android.location.Location;
 import java.util.ArrayList;
 
 public class ArChar {
+    public enum positionEnum {
+        NORTH,
+        EAST_NORTH,
+        EAST,
+        EAST_SOUTH,
+        SOUTH,
+        WEST_SOUTH,
+        WEST,
+        WEST_NORTH,
+    }
+    public static String positionStr[] = {"北", "東北", "東", "東南", "南", "西南", "西", "西北"};
+
     private final int EAST_NORTH = 1;
     private final int EAST_SOUTH = 3;
     private final int WEST_SOUTH = 5;
@@ -24,7 +36,7 @@ public class ArChar {
         private float longitude;
         private float xCoordinate;
         private float yCoordinate;
-        private int arQuadrant; // 0:North, 1:east, 2:north, 3:west
+        private int arQuadrant; // Please refer to ArChar :: positionEnum
         private boolean isShown;
         private int distance;
 
@@ -189,35 +201,61 @@ public class ArChar {
         if (dbArInfo.size() <= 0) {
             throw new IllegalArgumentException("DB size must be > 0");
         }
-
         calDirectionAndDistance(myLocat);
-        calCoord();
+        mappingTOScreenDisplay();
     }
 
-    private void calCoord() {
-        float x = 0, y = 0, setX, setY;
+    private void mappingTOScreenDisplay() {
+        float x, y, setX, setY;
 
         setX = windowWidth / 10;
         setY = windowHeight / 10;
 
         for (int i = 0; i < dbArInfo.size(); i++) {
             if (dbArInfo.get(i).getDistance() >= 20000) {
-
+                x = 0;
+                y = 0;
+            } else if (dbArInfo.get(i).getDistance() >= 10000) {
+                x = setX * 5;
+                y = setY * 4 - dbArInfo.get(i).getDistance() / 20;
             } else if (dbArInfo.get(i).getDistance() >= 5000) {
-
+                x = setX * 0;
+                y = setY * 5 - dbArInfo.get(i).getDistance() / 15;
+            } else if (dbArInfo.get(i).getDistance() >= 1000) {
+                x = setX * 4;
+                y = setY * 6 - dbArInfo.get(i).getDistance() / 10;
             } else {
                 x = setX * 2;
-                y = setY * 6;
+                y = setY * 7 - dbArInfo.get(i).getDistance() / 5;
             }
 
-            switch (dbArInfo.get(i).getArQuadrant()) {
-                case EAST_NORTH:
-                    dbArInfo.get(i).setxCoordinate(x);
-                    dbArInfo.get(i).setyCoordinate(y);
-                    break;
-            }
+            dbArInfo.get(i).setxCoordinate(x);
+            dbArInfo.get(i).setyCoordinate(y);
+
+//            switch (dbArInfo.get(i).getArQuadrant()) {
+//                case EAST_NORTH:
+//                    dbArInfo.get(i).setxCoordinate(x);
+//                    dbArInfo.get(i).setyCoordinate(y);
+//                    break;
+//                case EAST_SOUTH:
+//                    dbArInfo.get(i).setxCoordinate(x);
+//                    dbArInfo.get(i).setyCoordinate(y);
+//                    break;
+//                case WEST_SOUTH:
+//                    dbArInfo.get(i).setxCoordinate(x);
+//                    dbArInfo.get(i).setyCoordinate(y);
+//                    break;
+//                case WEST_NORTH:
+//                    dbArInfo.get(i).setxCoordinate(x);
+//                    dbArInfo.get(i).setyCoordinate(y);
+//                    break;
+//                default:
+//                    break;
+//            }
 //            dbArInfo.get(i).setXYcoord(i, ((float) sampleXCoord[dispCount]), ((float) sampleYCoord[dispCount]));
         }
+
+
     }
 
     /**

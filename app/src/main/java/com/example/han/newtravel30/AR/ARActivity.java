@@ -34,6 +34,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Size;
+import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
@@ -51,7 +52,6 @@ import com.google.android.gms.location.LocationServices;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 
 public class ARActivity extends AppCompatActivity implements LocationListener {
@@ -59,14 +59,14 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
     /*********************
      * DEFINE VARIABLE
      ********************/
-    private final boolean DEBUG_MESSAGE = false;
+    private final boolean DEBUG_MESSAGE = true;
     private final boolean TEST_TRACE_CODE = true;
     private final int REQUEST_CAMERA = 1;
     public static final int REQUEST_LOCATION = 2;
     private final int REQUEST_SCREEN_SHOT = 3;
-    private final int AR_OBJECT_WIDTH = 400;
+    private final int AR_OBJECT_WIDTH = 300;
     private final int MAXIMUM_NUM_DISPLAY_AR = 2;
-    private final int MAXIMUM_DISTANCE = 5000; //meter
+    private final int MAXIMUM_DISTANCE = 20000; //meter
     private final int MINIMUM_DISTANCE_TO_SHOW = 5000;
     /***********************************************************/
 
@@ -96,7 +96,7 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
     private double sampleXCoord[] = {600, 300, 700};
     private double sampleYCoord[] = {400, 1200, 1400};
     private int arOri[];
-    private Location myLocat;
+    public static Location myLocat;
     float[] accelerometerValues = new float[3];
     float[] magneticFieldValues = new float[3];
     private int myOri;
@@ -144,7 +144,7 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
                     android.Manifest.permission.CAMERA}, REQUEST_LOCATION);
         } else {
-            getMyLocation();
+            myLocat = useAPI.getMyLocation(ARActivity.this);
             isLocatOK = true;
         }
 
@@ -152,8 +152,8 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
         arLocatMark = BitmapFactory.decodeResource(getResources(), R.drawable.ar_locat_mark);
         cameraText.setSurfaceTextureListener(mSurfaceTextureListener);
 
-//        OverlayView arContent = new OverlayView(getApplicationContext());
-//        frameAR.addView(arContent);
+        OverlayView arContent = new OverlayView(getApplicationContext());
+        frameAR.addView(arContent);
 
         // Load Raw file and covert to String
         data = useAPI.covRawToString(getResources().openRawResource(R.raw.attractions));
@@ -161,30 +161,29 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
         // Parser json data
         dbTouris = useAPI.parserJsonFromTouris(data);
 
-        /*************************  For Debug Beg ************************* */
+        // insert and init to ListView
+        if (DEBUG_MESSAGE == true) {
+            /*************************  For Debug Beg ************************* */
+            dbAR.setData("東海運動公園", ((float)22.743967), ((float)121.142554), 0, 0, 0, false, 0);
+            dbAR.setData("臺東舊鐵道路廊", ((float)22.752842), ((float)121.145902), 0, 0, 0, false, 0);
+            dbAR.setData("卑南豬血湯台東店", ((float)22.758896), ((float)121.143733), 0, 0, 0, false, 0);
+            dbAR.setData("台東糖廠冰店", ((float)22.768181), ((float)121.128052), 0, 0, 0, false, 0);
+            dbAR.setData("卑南遺址", ((float)22.791554), ((float)121.119651), 0, 0, 0, false, 0);
+            dbAR.setData("台東森林公園", ((float)22.763301), ((float)121.158261), 0, 0, 0, false, 0);
+            dbAR.setData("星星部落景觀咖啡", ((float)22.811714), ((float)121.150892), 0, 0, 0, false, 0);
+            dbAR.setData("知本站", ((float)22.712427), ((float)121.061074), 0, 0, 0, false, 0);
+            dbAR.setData("三和海濱公園", ((float)22.669924), ((float)121.035710), 0, 0, 0, false, 0);
+            dbAR.setData("後山傳奇美食館", ((float)22.668706), ((float)121.034508), 0, 0, 0, false, 0);
 //        dbAR.setData("新竹關東橋郵局", ((float) 24.782646), ((float) 121.018707), 0, 0, 0, false, 0);
 //        dbAR.setData("竹北火車站", ((float) 24.839656), ((float) 121.009613), 0, 0, 0, false, 0);
 //        dbAR.setData("十八尖山停車場", ((float) 24.795013), ((float) 120.986764), 0, 0, 0, false, 9);
-        /*************************  For Debug End ************************* */
-
-        // insert and init to ListView
-//        LongitudeArr = new String[dbTouris.size()];
-//        LatitudeArr = new String[dbTouris.size()];
-//        namesArr = new String[dbTouris.size()];
-//        xCoordinate = new double[dbTouris.size()];
-//        yCoordinate = new double[dbTouris.size()];
-//        arOri = new int[dbTouris.size()];
-//
-//        for (int i = 0; i < dbTouris.size(); i++) {
-//            LongitudeArr[i] = dbTouris.get(i).getLongitude();
-//            LatitudeArr[i] = dbTouris.get(i).getLatitude();
-//            namesArr[i] = dbTouris.get(i).getName();
-//            Log.d("Coordinate", "Longitude: " + LongitudeArr[i].toString() + ", Latitude: " + LatitudeArr[i].toString());
-//        }
-
-        for (int i = 0; i < dbTouris.size(); i++) {
-            dbAR.setData(dbTouris.get(i).getName(), Float.parseFloat(dbTouris.get(i).getLatitude()), Float.parseFloat(dbTouris.get(i).getLongitude()), 0, 0, 0, false, 0);
-            Log.d("dbAR.getLatitude", String.valueOf(dbAR.getLatitude(i)));
+            /*************************  For Debug End ************************* */
+        }
+        else {
+            for (int i = 0; i < dbTouris.size(); i++) {
+                dbAR.setData(dbTouris.get(i).getName(), Float.parseFloat(dbTouris.get(i).getLatitude()), Float.parseFloat(dbTouris.get(i).getLongitude()), 0, 0, 0, false, 0);
+                Log.d("dbAR.getLatitude", String.valueOf(dbAR.getLatitude(i)));
+            }
         }
 
         btnScreen.setOnClickListener(new View.OnClickListener() {
@@ -209,7 +208,7 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             switch (requestCode) {
                 case REQUEST_LOCATION:
-                    getMyLocation();
+                    myLocat = useAPI.getMyLocation(ARActivity.this);
                     isLocatOK = true;
                     break;
                 case REQUEST_SCREEN_SHOT:
@@ -220,26 +219,6 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
         } else {
             //user do reject
         }
-    }
-
-    public void getMyLocation() {
-        Location bestLocation = null;
-        locationMgr = (LocationManager) this.getSystemService(LOCATION_SERVICE);
-
-        List<String> providers = locationMgr.getProviders(true);
-        for (String provider : providers) {
-            Location l = locationMgr.getLastKnownLocation(provider);
-            if (l == null) {
-                continue;
-            }
-            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
-                // Found best last known location: %s", l);
-                bestLocation = l;
-            }
-        }
-        myLocat = bestLocation;
-
-//        Log.d("GPS", String.valueOf(myLocat.getLatitude()) + ", " + String.valueOf(myLocat.getLongitude()));
     }
 
     private void initView() {
@@ -377,29 +356,31 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
         }
     }
 
-    /*@Override
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         float x = event.getX();
         float y = event.getY();
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+
                 for (int i = 0; i < dbAR.getSize(); i++) {
                     if (dbAR.getIsShown(i) == true) {
-                        if (useAPI.isTouchInContain(AR_OBJECT_WIDTH, x, y, dbAR.getXCoord(i), dbAR.getYCoord(i))) {
-                            Intent intCont = new Intent();
-                            intCont.setClass(CamActivity.this, ARContentActivity.class);
-                            intCont.putExtra("name", dbAR.getName(i));
-                            startActivity(intCont);
+                        if (useAPI.isTouchInContain(arLocatMark.getWidth() - 300, x, y, dbAR.getXCoord(i), dbAR.getYCoord(i))) {
+//                            Intent intent = new Intent();
+//                            intent.setClass(ARActivity.this, ListContentActivity.class);
+//                            Bundle bundle = new Bundle();
+//                            bundle.putString("name", dbAR.getName(i));
+////                            bundle.putString("introduction", dbAR.getIntroduction());
+//                            intent.putExtras(bundle);
+//                            startActivity(intent);
                         }
                     }
                 }
-
                 return true;
         }
-
         return super.onTouchEvent(event);
-    }*/
+    }
 
     public class OverlayView extends View implements SensorEventListener {
         public OverlayView(Context context) {
@@ -420,119 +401,26 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
             super.onDraw(canvas);
             dispCount = 0;
 
-//            dbgCreateArObj(canvas, ((float) (screenWidth * 0.35)), ((float) (screenHeight * 0.85)), "debug mode");
-//
-//            for (int i = 0; i < dbAR.getSize(); i++) {
-//                if (dbAR.getXCoord(i) == 0 || dbAR.getYCoord(i) == 0) {
-//                    continue;
-//                }
-//
-//                if (dbAR.getDistance(i) <= MAXIMUM_DISTANCE) {
-//                    createNewObj(canvas, dbAR.getXCoord(i) + (dispCount * 200), dbAR.getYCoord(i), i);
-//                    dispCount++;
-//                }
-//
+            dbgCreateArObj(canvas, ((float) (screenWidth * 0.35)), ((float) (screenHeight * 0.85)), "debug mode");
+
+            for (int i = 0; i < dbAR.getSize(); i++) {
+                if (myOri != dbAR.getQuadrant(i)) {
+                    continue;
+                }
+
+                if (dbAR.getDistance(i) <= MAXIMUM_DISTANCE) {
+                    Log.d("getLatitude", ARActivity.myLocat.getLatitude() - dbAR.getLatitude(i) + "");
+                    createNewObj(canvas, dbAR.getXCoord(i), dbAR.getYCoord(i), i);
+                    dbAR.setIsShown(i, true);
+                    dispCount++;
+                }
+                else {
+                    dbAR.setIsShown(i, false);
+                }
+
 //                if (dispCount > MAXIMUM_NUM_DISPLAY_AR) {
 //                    break;
 //                }
-//            }
-
-            if (true) {
-                switch (myOri) {
-                    case 0:
-                    case 1:
-                        if (DEBUG_MESSAGE == true)
-                            dbgCreateArObj(canvas, ((float) (screenWidth * 0.35)), ((float) (screenHeight * 0.85)), "北");
-                        /*************************  For Debug Beg **************************/
-                        int count = 0;
-                        for (int i = 0; i < dbAR.getSize(); i++) {
-//                        if ((dbAR.getQuadrant(i) == 1) || (dbAR.getQuadrant(i) == 7)) {
-//                            createNewObj(canvas, ((float) sampleXCoord[dispCount]), ((float) sampleYCoord[dispCount]), i);
-//                            dbAR.setXYcoord(i, ((float) sampleXCoord[dispCount]), ((float) sampleYCoord[dispCount]));
-//                            dbAR.setIsShown(i, true);
-//                            dispCount++;
-//                        } else {
-//                            dbAR.setIsShown(i, false);
-//                        }
-//
-//                        if (dispCount > MAXIMUM_NUM_DISPLAY_AR) {
-//                            break;
-//                        }
-                            if (dbAR.getDistance(i) <= 5000 && dbAR.getXCoord(i) != 0) {
-                                createNewObj(canvas, dbAR.getXCoord(i), dbAR.getYCoord(i), i, count);
-                                dbAR.setIsShown(i, true);
-                                dispCount++;
-                                count++;
-                            } else {
-                                dbAR.setIsShown(i, false);  /***** Append **/
-                            }
-
-                            if (dispCount > MAXIMUM_NUM_DISPLAY_AR) {
-                                break;
-                            }
-                        }
-                        /*************************  For Debug End **************************/
-                        break;
-                    case 2:
-                    case 3:
-                        if (DEBUG_MESSAGE == true)
-                            dbgCreateArObj(canvas, ((float) (screenWidth * 0.35)), ((float) (screenHeight * 0.85)), "東");
-                        break;
-                    case 4:
-                    case 5:
-                        if (DEBUG_MESSAGE == true)
-                            dbgCreateArObj(canvas, ((float) (screenWidth * 0.35)), ((float) (screenHeight * 0.85)), "南");
-//                    for (int i = 0; i < 10; i++) {
-//                        if (arOri[i] == 3) {
-//                            createNewObj(canvas, sampleXCoord[dispCount], sampleYCoord[dispCount], i);
-//                            dispCount++;
-//                        }
-//
-//                        if (dispCount > 1) {
-//                            break;
-//                        }
-//                    }
-                        /*************************  For Debug Beg **************************/
-//                    for (int i = 0; i < dbAR.getSize(); i++) {
-//                        if ((dbAR.getQuadrant(i) == 5) || (dbAR.getQuadrant(i) == 3)) {
-//                            createNewObj(canvas, ((float) sampleXCoord[dispCount]), ((float) sampleYCoord[dispCount]), i);
-//                            dbAR.setXYcoord(i, ((float) sampleXCoord[dispCount]), ((float) sampleYCoord[dispCount]));
-//                            dbAR.setIsShown(i, true);
-//                            dispCount++;
-//                        } else {
-//                            dbAR.setIsShown(i, false);
-//                        }
-//
-//                        if (dispCount > MAXIMUM_NUM_DISPLAY_AR) {
-//                            break;
-//                        }
-//                    }
-                        /*************************  For Debug End **************************/
-                        break;
-                    case 6:
-                    case 7:
-                        if (DEBUG_MESSAGE == true)
-                            dbgCreateArObj(canvas, ((float) (screenWidth * 0.35)), ((float) (screenHeight * 0.85)), "西");
-                        /*************************  For Debug Beg **************************/
-//                    for (int i = 0; i < dbAR.getSize(); i++) {
-//                        if ((dbAR.getQuadrant(i) == 5) || (dbAR.getQuadrant(i) == 7)) {
-//                            createNewObj(canvas, ((float) sampleXCoord[dispCount]), ((float) sampleYCoord[dispCount]), i);
-//                            dbAR.setXYcoord(i, ((float) sampleXCoord[dispCount]), ((float) sampleYCoord[dispCount]));
-//                            dbAR.setIsShown(i, true);
-//                            dispCount++;
-//                        } else {
-//                            dbAR.setIsShown(i, false);
-//                        }
-//
-//                        if (dispCount > MAXIMUM_NUM_DISPLAY_AR) {
-//                            break;
-//                        }
-//                    }
-                        /*************************  For Debug End **************************/
-                        break;
-                    default:
-                        break;
-                }
             }
 
             if (dispCount == 0) {
@@ -585,15 +473,14 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
 
     }
 
-    public void createNewObj(Canvas canvas, float x, float y, int index, int tag) {
-        int distance = tag * 300;
-        Bitmap b = Bitmap.createScaledBitmap(arLocatMark, arLocatMark.getWidth(), arLocatMark.getHeight() / 2, false);
+    public void createNewObj(Canvas canvas, float x, float y, int index) {
+        Bitmap b = Bitmap.createScaledBitmap(arLocatMark, arLocatMark.getWidth()-300, arLocatMark.getHeight()-300, false);
         Paint contentPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        contentPaint.setTextSize(50);
-        canvas.drawBitmap(b, x, y - distance, contentPaint);
+        contentPaint.setTextSize(40);
+        canvas.drawBitmap(b, x, y, contentPaint);
 //        canvas.drawText(namesArr[index], x.floatValue() + 110, y.floatValue() + 150, contentPaint);
-        canvas.drawText(dbAR.getName(index), x + 200, y + 160 - distance, contentPaint);
-        canvas.drawText("距離為 : " + dbAR.getDistance(index) + "公尺", x + 200, y + 210 - distance, contentPaint);
+        canvas.drawText(dbAR.getName(index), x + 110, y + 150, contentPaint);
+        canvas.drawText("距離為 : " + dbAR.getDistance(index) + "公尺", x + 110, y + 200, contentPaint);
     }
 
     public void dbgCreateArObj(Canvas canvas, float x, float y, String str) {
@@ -601,59 +488,49 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
         contentPaint.setColor(Color.RED);
         contentPaint.setTextSize(50);
 
-        w = ((int) x) + 400;
+        w = ((int) x) + 300;
         h = ((int) y) + 100;
-        areaRect = new Rect(((int) x), ((int) y), w, h);
+        areaRect = new Rect(((int) x), ((int) y-70), (int)x+300, (int)y+50);
         canvas.drawRect(areaRect, contentPaint);
 
-//        RectF rectf = new RectF(areaRect);
-//        rectf.left += (areaRect.width()) / 10.0f;
-//        rectf.top += (areaRect.height()) / 4.0f;
-
         contentPaint.setColor(Color.WHITE);
-        canvas.drawText(str, x, y + 60, contentPaint);
-
-        if (isLocatOK == true) {
-            if (myLocat != null) {
-                canvas.drawText("My location : " + myLocat.getLatitude() + ", " + myLocat.getLongitude(), 0, y + 150, contentPaint);
-            }
-        }
-
-        canvas.drawText("window : " + dbAR.getWindowWidth() + ", " + dbAR.getWindowHeight(), 0, y + 200, contentPaint);
-
+        canvas.drawText(str, x, y, contentPaint);
+        canvas.drawText("My position : " + ArChar.positionStr[myOri], 0, y + 100, contentPaint);
+        canvas.drawText("My location : " + myLocat.getLatitude() + ", " + myLocat.getLongitude(), 0, y + 150, contentPaint);
+        canvas.drawText("window size : " + dbAR.getWindowHeight() + ", " + dbAR.getWindowWidth(), 0, y + 200, contentPaint);
     }
 
     public void showArNotFound(Canvas canvas, float x, float y, Bitmap bitmap) {
-        Bitmap b = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / 3, bitmap.getHeight() / 3, false);
+        Bitmap b = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / 4, bitmap.getHeight() / 4, false);
         Paint contentPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 //        contentPaint.setTextAlign(Paint.Align.CENTER);
-        contentPaint.setTextSize(50);
-        canvas.drawBitmap(b, x - 50, y - 85, contentPaint);
-        canvas.drawText("附近無景點", x + 70, y + 200, contentPaint);
+        contentPaint.setTextSize(40);
+        canvas.drawBitmap(b, x-10, y-85, contentPaint);
+        canvas.drawText("附近無景點", x + 95, y + 135, contentPaint);
     }
 
-    private double getAzimuthFromGPS(double lat_a, double lng_a, double lat_b, double lng_b) {
-        double d, b;
-        lat_a = lat_a * Math.PI / 180;
-        lng_a = lng_a * Math.PI / 180;
-        lat_b = lat_b * Math.PI / 180;
-        lng_b = lng_b * Math.PI / 180;
-
-        d = Math.sin(lat_a) * Math.sin(lat_b) + Math.cos(lat_a) * Math.cos(lat_b) * Math.cos(lng_b - lng_a);
-        d = Math.sqrt(1 - d * d);
-        d = Math.cos(lat_b) * Math.sin(lng_b - lng_a) / d;
-        b = Math.cos(lat_a) * Math.sin(lng_b - lng_a) / d;
-        b = Math.asin(b) * 180 / Math.PI + 180;
-        d = Math.asin(d) * 180 / Math.PI;
-
-//        if (d < 0) {
-//            d += 360;
-//        }
-        Log.d("Azimuth", "Azimuth = " + String.valueOf(b));
-
-// d = Math.round(d*10000);
-        return b;
-    }
+//    private double getAzimuthFromGPS(double lat_a, double lng_a, double lat_b, double lng_b) {
+//        double d, b;
+//        lat_a = lat_a * Math.PI / 180;
+//        lng_a = lng_a * Math.PI / 180;
+//        lat_b = lat_b * Math.PI / 180;
+//        lng_b = lng_b * Math.PI / 180;
+//
+//        d = Math.sin(lat_a) * Math.sin(lat_b) + Math.cos(lat_a) * Math.cos(lat_b) * Math.cos(lng_b - lng_a);
+//        d = Math.sqrt(1 - d * d);
+//        d = Math.cos(lat_b) * Math.sin(lng_b - lng_a) / d;
+//        b = Math.cos(lat_a) * Math.sin(lng_b - lng_a) / d;
+//        b = Math.asin(b) * 180 / Math.PI + 180;
+//        d = Math.asin(d) * 180 / Math.PI;
+//
+////        if (d < 0) {
+////            d += 360;
+////        }
+//        Log.d("Azimuth", "Azimuth = " + String.valueOf(b));
+//
+//// d = Math.round(d*10000);
+//        return b;
+//    }
 
     private void calculateOrientation() {
         float[] values = new float[3];
@@ -668,46 +545,46 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
         //values[2] = (float) Math.toDegrees(values[2]);
 
         if (values[0] >= -5 && values[0] < 5) {
-            myOri = 0;
+            myOri = ArChar.positionEnum.NORTH.ordinal();
 //            Log.i("Orientation", "正北");
         } else if (values[0] >= 5 && values[0] < 85) {
-            myOri = 1;
-//            Log.i("Orientation", "东北");
+            myOri = ArChar.positionEnum.EAST_NORTH.ordinal();
+//            Log.i("Orientation", "東北");
         } else if (values[0] >= 85 && values[0] <= 95) {
-            myOri = 2;
-//            Log.i("Orientation", "正东");
+            myOri = ArChar.positionEnum.EAST.ordinal();
+//            Log.i("Orientation", "正東");
         } else if (values[0] >= 95 && values[0] < 175) {
-            myOri = 3;
-//            Log.i("Orientation", "东南");
+            myOri = ArChar.positionEnum.EAST_SOUTH.ordinal();
+//            Log.i("Orientation", "東南");
         } else if ((values[0] >= 175 && values[0] <= 180) || (values[0]) >= -180 && values[0] < -175) {
-            myOri = 4;
+            myOri = ArChar.positionEnum.SOUTH.ordinal();
 //            Log.i("Orientation", "正南");
         } else if (values[0] >= -175 && values[0] < -95) {
-            myOri = 5;
+            myOri = ArChar.positionEnum.WEST_SOUTH.ordinal();
 //            Log.i("Orientation", "西南");
         } else if (values[0] >= -95 && values[0] < -85) {
-            myOri = 6;
+            myOri = ArChar.positionEnum.WEST.ordinal();
 //            Log.i("Orientation", "正西");
         } else if (values[0] >= -85 && values[0] < -5) {
-            myOri = 7;
+            myOri = ArChar.positionEnum.WEST_NORTH.ordinal();
 //            Log.i("Orientation", "西北");
         }
     }
 
-    private Bitmap screenShot(View view) {
-        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        view.draw(canvas);
-        return bitmap;
-    }
-
-    private static Bitmap getScreenShot(View view) {
-        View screenView = view.getRootView();
-        screenView.setDrawingCacheEnabled(true);
-        Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
-        screenView.setDrawingCacheEnabled(false);
-        return bitmap;
-    }
+//    private Bitmap screenShot(View view) {
+//        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+//        Canvas canvas = new Canvas(bitmap);
+//        view.draw(canvas);
+//        return bitmap;
+//    }
+//
+//    private static Bitmap getScreenShot(View view) {
+//        View screenView = view.getRootView();
+//        screenView.setDrawingCacheEnabled(true);
+//        Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
+//        screenView.setDrawingCacheEnabled(false);
+//        return bitmap;
+//    }
 
     private void captureScreen(int requestCode) {
         boolean hasObj = false;
@@ -719,13 +596,10 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
             Bitmap bitmap = cameraText.getBitmap();
             Canvas canvas = new Canvas(bitmap);
 
-            int count = 0;
             for (int i = 0; i < dbAR.getSize(); i++) {
                 if (dbAR.getIsShown(i) == true) {
-                    createNewObj(canvas, dbAR.getXCoord(i), dbAR.getYCoord(i), i, count);
+                    createNewObj(canvas, dbAR.getXCoord(i), dbAR.getYCoord(i), i);
                     hasObj = true;
-                    count++;
-                    Log.i("captureScreen", i + "");
                 }
             }
 
