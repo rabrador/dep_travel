@@ -22,8 +22,12 @@ import com.example.han.newtravel30.AR.useAPI;
 import com.example.han.newtravel30.R;
 
 import java.io.InputStream;
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 public class HotListActivity extends AppCompatActivity {
     private RecyclerView mList;
@@ -70,19 +74,23 @@ public class HotListActivity extends AppCompatActivity {
         }
 
         // Classify tourism
-        int newIndex = 0;
         for (int i=0; i<dbTourism.size();i++) {
             if (dbTourism.get(i).getClassification() == bundle.getInt("classify")) {
-                Touris.createEmptyEntry(displayTourism);
-                displayTourism.get(newIndex).setName(dbTourism.get(i).getName());
-                displayTourism.get(newIndex).setIntroduction(dbTourism.get(i).getIntroduction());
-                displayTourism.get(newIndex).setAddress(dbTourism.get(i).getAddress());
-                displayTourism.get(newIndex).setImageURL(dbTourism.get(i).getImageURL());
-                displayTourism.get(newIndex).setLongitude(dbTourism.get(i).getLongitude());
-                displayTourism.get(newIndex).setLatitude(dbTourism.get(i).getLatitude());
-                newIndex++;
+                Touris tourism = new Touris(dbTourism.get(i).getName(), "", dbTourism.get(i).getIntroduction(), dbTourism.get(i).getAddress(),
+                        dbTourism.get(i).getLongitude(), dbTourism.get(i).getLatitude(), dbTourism.get(i).getImageURL(), dbTourism.get(i).getClassification());
+
+                displayTourism.add(tourism);
             }
         }
+
+        /* Sort by Name */
+        Collections.sort(displayTourism, new Comparator<Touris>(){
+            @Override
+            public int compare(Touris o1, Touris o2) {
+                Collator instance = Collator.getInstance(Locale.TAIWAN);
+                return instance.compare(o1.getName(), o2.getName());
+            }
+        });
 
         // insert to ListView
         Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show();

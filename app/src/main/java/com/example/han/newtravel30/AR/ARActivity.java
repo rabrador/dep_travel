@@ -23,7 +23,6 @@ import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -59,12 +58,11 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
     /*********************
      * DEFINE VARIABLE
      ********************/
-    private final boolean DEBUG_MESSAGE = false;
+    private final boolean DEBUG_MESSAGE = true;
     private final boolean TEST_TRACE_CODE = true;
     private final int REQUEST_CAMERA = 1;
     public static final int REQUEST_LOCATION = 2;
     private final int REQUEST_SCREEN_SHOT = 3;
-    private final int AR_OBJECT_WIDTH = 300;
     private final int MAXIMUM_NUM_DISPLAY_AR = 2;
     private final int MAXIMUM_DISTANCE = 20000; //meter
     private final int MINIMUM_DISTANCE_TO_SHOW = 5000;
@@ -72,7 +70,6 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
 
     /******************** LOCAL VARIABLE ********************/
     private GoogleApiClient mGoogleApiClient;
-    private LocationManager locationMgr;
     private boolean isLocatOK = false;
     private Size previewSize = null;
     private TextureView cameraText = null;
@@ -83,32 +80,20 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
     private String accelData = "Accelerometer Data";
     private String compassData = "Compass Data";
     private String gyroData = "";
-    private double x, y = 0;
-    private int w, h = 0;
     private Rect areaRect;
     ArrayList<Touris> dbTouris = new ArrayList<>();
     private String data;
-    private String[] LongitudeArr;
-    private String[] LatitudeArr;
-    private String[] namesArr;
-    private double xCoordinate[];
-    private double yCoordinate[];
-    private double sampleXCoord[] = {600, 300, 700};
-    private double sampleYCoord[] = {400, 1200, 1400};
-    private int arOri[];
-    public static Location myLocat;
     float[] accelerometerValues = new float[3];
     float[] magneticFieldValues = new float[3];
     private int myOri;
     private Bitmap arNotFound;
     private Bitmap arLocatMark;
     private ImageButton btnScreen;
-    private Canvas screenShotCanvas;
     private int screenHeight;
     private int screenWidth;
     private ArChar dbAR = new ArChar();
     private int dispCount = 0;
-
+    public static Location myLocat;
     /***********************************************************/
 
     @Override
@@ -490,8 +475,6 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
         contentPaint.setColor(Color.RED);
         contentPaint.setTextSize(50);
 
-        w = ((int) x) + 300;
-        h = ((int) y) + 100;
         areaRect = new Rect(((int) x), ((int) y-70), (int)x+300, (int)y+50);
         canvas.drawRect(areaRect, contentPaint);
 
