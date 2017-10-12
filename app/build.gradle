@@ -7,8 +7,8 @@ android {
         applicationId "com.nptu.csie.newtravel30"
         minSdkVersion 21
         targetSdkVersion 23
-        versionCode 51
-        versionName '3.4.2'
+        versionCode 52
+        versionName '3.4.3'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
