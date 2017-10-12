@@ -58,7 +58,7 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
     /*********************
      * DEFINE VARIABLE
      ********************/
-    private final boolean DEBUG_MESSAGE = true;
+    private final boolean DEBUG_MESSAGE = false;
     private final boolean TEST_TRACE_CODE = true;
     private final int REQUEST_CAMERA = 1;
     public static final int REQUEST_LOCATION = 2;
@@ -165,10 +165,15 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
             /*************************  For Debug End ************************* */
         }
         else {
-            for (int i = 0; i < dbTouris.size(); i++) {
-                dbAR.setData(dbTouris.get(i).getName(), Float.parseFloat(dbTouris.get(i).getLatitude()), Float.parseFloat(dbTouris.get(i).getLongitude()), 0, 0, 0, false, 0);
-                Log.d("dbAR.getLatitude", String.valueOf(dbAR.getLatitude(i)));
-            }
+//            for (int i = 0; i < dbTouris.size(); i++) {
+//                dbAR.setData(dbTouris.get(i).getName(), Float.parseFloat(dbTouris.get(i).getLatitude()), Float.parseFloat(dbTouris.get(i).getLongitude()), 0, 0, 0, false, 0);
+//                Log.d("dbAR.getLatitude", String.valueOf(dbAR.getLatitude(i)));
+//            }
+        }
+
+        for (int i = 0; i < dbTouris.size(); i++) {
+            dbAR.setData(dbTouris.get(i).getName(), Float.parseFloat(dbTouris.get(i).getLatitude()), Float.parseFloat(dbTouris.get(i).getLongitude()), 0, 0, 0, false, 0);
+            Log.d("dbAR.getLatitude", String.valueOf(dbAR.getLatitude(i)));
         }
 
         btnScreen.setOnClickListener(new View.OnClickListener() {
