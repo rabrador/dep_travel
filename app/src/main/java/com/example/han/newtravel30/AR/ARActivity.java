@@ -165,15 +165,10 @@ public class ARActivity extends AppCompatActivity implements LocationListener {
             /*************************  For Debug End ************************* */
         }
         else {
-//            for (int i = 0; i < dbTouris.size(); i++) {
-//                dbAR.setData(dbTouris.get(i).getName(), Float.parseFloat(dbTouris.get(i).getLatitude()), Float.parseFloat(dbTouris.get(i).getLongitude()), 0, 0, 0, false, 0);
-//                Log.d("dbAR.getLatitude", String.valueOf(dbAR.getLatitude(i)));
-//            }
-        }
-
-        for (int i = 0; i < dbTouris.size(); i++) {
-            dbAR.setData(dbTouris.get(i).getName(), Float.parseFloat(dbTouris.get(i).getLatitude()), Float.parseFloat(dbTouris.get(i).getLongitude()), 0, 0, 0, false, 0);
-            Log.d("dbAR.getLatitude", String.valueOf(dbAR.getLatitude(i)));
+            for (int i = 0; i < dbTouris.size(); i++) {
+                dbAR.setData(dbTouris.get(i).getName(), Float.parseFloat(dbTouris.get(i).getLatitude()), Float.parseFloat(dbTouris.get(i).getLongitude()), 0, 0, 0, false, 0);
+                Log.d("dbAR.getLatitude", String.valueOf(dbAR.getLatitude(i)));
+            }
         }
 
         btnScreen.setOnClickListener(new View.OnClickListener() {
